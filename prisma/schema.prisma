@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Deployment {
+  id            String   @id @default(cuid())
+  vercelId      String?
+  projectName   String
+  url           String?
+  status        String   @default("SUCCESS")
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  sender    String
+  content   String
+  createdAt DateTime @default(now())
+}
