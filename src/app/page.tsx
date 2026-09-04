@@ -268,8 +268,13 @@ export default function HomePage() {
   }, [appLoaded]);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  if (chatEndRef.current) {
+    const container = chatEndRef.current.parentElement?.parentElement;
+    if (container) {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
+  }
+}, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
